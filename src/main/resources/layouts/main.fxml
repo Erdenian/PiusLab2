@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="ru.mp45.piuslab2.MainController"
-            prefHeight="800.0" prefWidth="480.0">
-
-</AnchorPane>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<TabPane fx:id="mainPane" fx:controller="ru.mp45.piuslab2.controllers.MainController"
+         xmlns="http://javafx.com/javafx/8.0.40"
+         xmlns:fx="http://www.w3.org/2001/XInclude"
+         prefHeight="800.0" prefWidth="800.0">
+    <tabs>
+        <Tab text="first">
+            <fx:include fx:id="firstTabPage" source="first_tab.fxml"/>
+        </Tab>
+        <Tab text="second">
+            <fx:include fx:id="secondTabPage" source="second_tab.fxml"/>
+        </Tab>
+        <Tab text="third">
+            <fx:include fx:id="thirdTabPage" source="third_tab.fxml"/>
+        </Tab>
+    </tabs>
+</TabPane>
