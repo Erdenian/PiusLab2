@@ -19,13 +19,13 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/layouts/main.fxml"));
-        Scene scene = new Scene(root, 800.0, 800.0);
+        Scene scene = new Scene(root, 800.0, 480.0);
 
         primaryStage.setTitle("Кирилл лох");
         primaryStage.setScene(scene);
 
-        primaryStage.setWidth(primaryScreenBounds.getWidth());
-        primaryStage.setHeight(primaryScreenBounds.getHeight());
+//        primaryStage.setWidth(primaryScreenBounds.getWidth());
+//        primaryStage.setHeight(primaryScreenBounds.getHeight());
         primaryStage.setResizable(false);
 
         primaryStage.show();

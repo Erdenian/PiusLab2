@@ -5,7 +5,7 @@
 <TabPane fx:id="mainPane" fx:controller="ru.mp45.piuslab2.controllers.MainController"
          xmlns="http://javafx.com/javafx/8.0.40"
          xmlns:fx="http://www.w3.org/2001/XInclude"
-         prefHeight="800.0" prefWidth="800.0">
+         prefHeight="800.0" prefWidth="480.0">
     <tabs>
         <Tab text="first">
             <fx:include fx:id="firstTabPage" source="first_tab.fxml"/>
