@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+
+import java.util.regex.Pattern;
 
 public class FirstTabController {
 
@@ -25,6 +28,16 @@ public class FirstTabController {
     private void initialize() {
         plotList.getItems().addAll(graphs);
         plotList.getSelectionModel().select(0);
+
+        Pattern pattern = Pattern.compile("\\d*|\\d+,\\d*");
+
+        TextFormatter formatter = new TextFormatter<>(change ->
+                pattern.matcher(change.getControlNewText()).matches() ? change : null);
+        TextFormatter formatter2 = new TextFormatter<>(change ->
+                pattern.matcher(change.getControlNewText()).matches() ? change : null);
+
+        startPoint.setTextFormatter(formatter);
+        endPoint.setTextFormatter(formatter2);
     }
 
     @FXML
