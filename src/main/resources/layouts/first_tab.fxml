@@ -9,7 +9,7 @@
 
     <HBox alignment="CENTER" spacing="10.0">
 
-        <Label fx:id="label"/>
+        <Label prefHeight="40.0" prefWidth="90.0" text="Параметры графика:" wrapText="true"/>
 
         <ComboBox fx:id="plotList"/>
 
@@ -17,7 +17,7 @@
 
         <TextField fx:id="endPoint" promptText="Конечная точка"/>
 
-        <Button onAction="#onClickMethod" text="Построить"/>
+        <Button defaultButton="true" onAction="#onClickMethod" text="Построить"/>
 
     </HBox>
 
