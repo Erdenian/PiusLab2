@@ -1,44 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ru.mp45.piuslab2.controllers.FirstTabController">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="ru.mp45.piuslab2.controllers.FirstTabController">
 
-    <Text text="Выберите тип графика: "
-          layoutX="10.0" layoutY="65.0"/>
+    <HBox spacing="20">
+        <padding>
+            <Insets top="25" left="15" right="15"/>
+        </padding>
 
-    <ComboBox fx:id="plotList"
-              prefHeight="25.0" prefWidth="150.0"
-              layoutX="170.0" layoutY="50.0"/>
+        <Label text="Параметры графика: ">
+            <padding>
+                <Insets top="5"/>
+            </padding>
+        </Label>
 
-    <Text text="Начальная точка: "
-          layoutX="10.0" layoutY="115.0"/>
+        <ComboBox fx:id="plotList"/>
 
-    <TextField
-            fx:id="startPoint" promptText="Введите значение"
-            minHeight="25.0" maxHeight="25.0"
-            prefWidth="150.0"
-            layoutX="170.0" layoutY="100.0"/>
+        <TextField fx:id="startPoint" promptText="Начальная точка"/>
 
-    <Text text="Конечная точка: "
-          layoutX="10.0" layoutY="165.0"/>
+        <TextField fx:id="endPoint" promptText="Конечная точка"/>
 
-    <TextField
-            fx:id="endPoint" promptText="Введите значение"
-            minHeight="25.0" maxHeight="25.0"
-            prefWidth="150.0"
-            layoutX="170.0" layoutY="150.0"/>
+        <Button text="Построить" onAction="#onClickMethod"/>
+    </HBox>
 
-    <Text text="Построить график: "
-          layoutX="10.0" layoutY="215.0"/>
-
-    <Button text="OK" onAction="#onClickMethod"
-            prefHeight="20.0" prefWidth="75.0"
-            layoutX="195.0" layoutY="200.0"/>
-
-</AnchorPane>
+</VBox>
