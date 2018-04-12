@@ -3,7 +3,10 @@ package ru.mp45.piuslab2.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import java.util.HashMap;
 
 public class FirstTabController {
 
@@ -13,13 +16,21 @@ public class FirstTabController {
     private TextField startPoint;
     @FXML
     private TextField endPoint;
+    @FXML
+    private Label label;
 
-    private String[] listValues = {"Plot1", "Plot2", "Plot3", "Plot4"};
+    private HashMap<String, Integer> listValues;
 
     @FXML
     private void initialize() {
-        plotList.getItems().addAll(listValues);
-        plotList.setValue(listValues[0]);
+        label.setText("Параметры \n графика: ");
+        fillListValues();
+
+        String kindOfPlots[] = new String[listValues.size()];
+        listValues.keySet().toArray(kindOfPlots);
+
+        plotList.getItems().addAll(kindOfPlots);
+        plotList.setValue(kindOfPlots[0]);
     }
 
     @FXML
@@ -36,7 +47,7 @@ public class FirstTabController {
             return;
         }
 
-        onGraphChangeListener(plotList.getValue(), startPointCoordinate, endPointCoordinate);
+        onGraphChangeListener(listValues.get(plotList.getValue()), startPointCoordinate, endPointCoordinate);
     }
 
     private float getCoordinateFromField(TextField field) throws NumberFormatException {
@@ -52,7 +63,16 @@ public class FirstTabController {
         alert.showAndWait();
     }
 
-    private void onGraphChangeListener(String type, float start, float end) {
+    private void fillListValues() {
+        listValues = new HashMap<>();
+
+        listValues.put("Безинерционное звено", 1);
+        listValues.put("Звено с чистым запаздыванием", 2);
+        listValues.put("Опериодическое звено", 3);
+        listValues.put("Черный ящик", 4);
+    }
+
+    private void onGraphChangeListener(int type, float start, float end) {
 
     }
 }
