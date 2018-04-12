@@ -29,36 +29,24 @@ public class FirstTabController {
         plotList.getItems().addAll(graphs);
         plotList.getSelectionModel().select(0);
 
-        Pattern pattern = Pattern.compile("\\d*|\\d+,\\d*");
-
-        TextFormatter formatter = new TextFormatter<>(change ->
-                pattern.matcher(change.getControlNewText()).matches() ? change : null);
-        TextFormatter formatter2 = new TextFormatter<>(change ->
-                pattern.matcher(change.getControlNewText()).matches() ? change : null);
-
-        startPoint.setTextFormatter(formatter);
-        endPoint.setTextFormatter(formatter2);
+        Pattern pattern = Pattern.compile("\\d*|\\d+.\\d*");
+        startPoint.setTextFormatter(new TextFormatter<>(change ->
+                pattern.matcher(change.getControlNewText()).matches() ? change : null
+        ));
+        endPoint.setTextFormatter(new TextFormatter<>(change ->
+                pattern.matcher(change.getControlNewText()).matches() ? change : null
+        ));
     }
 
     @FXML
     public void onClickMethod() {
-
-        float startPointCoordinate;
-        float endPointCoordinate;
-
         try {
-            startPointCoordinate = getCoordinateFromField(startPoint);
-            endPointCoordinate = getCoordinateFromField(endPoint);
+            float startPointCoordinate = Float.parseFloat(startPoint.getText());
+            float endPointCoordinate = Float.parseFloat(endPoint.getText());
+            onGraphChangeListener(plotList.getSelectionModel().getSelectedIndex(), startPointCoordinate, endPointCoordinate);
         } catch (NumberFormatException nfe) {
             showAlertDialog();
-            return;
         }
-
-        onGraphChangeListener(plotList.getSelectionModel().getSelectedIndex(), startPointCoordinate, endPointCoordinate);
-    }
-
-    private float getCoordinateFromField(TextField field) throws NumberFormatException {
-        return Float.parseFloat(field.getCharacters().toString());
     }
 
     private void showAlertDialog() {
