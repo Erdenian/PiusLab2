@@ -13,9 +13,9 @@
 
         <ComboBox fx:id="plotList"/>
 
-        <TextField fx:id="startPoint" promptText="Начальная точка"/>
+        <TextField fx:id="startPoint" promptText="Начальная точка" text="0.0"/>
 
-        <TextField fx:id="endPoint" promptText="Конечная точка"/>
+        <TextField fx:id="endPoint" promptText="Конечная точка" text="10.0"/>
 
         <Button defaultButton="true" onAction="#onClickMethod" text="Построить"/>
 
