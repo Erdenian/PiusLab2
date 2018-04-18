@@ -3,35 +3,11 @@ package ru.mp45.piuslab2;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+
 import static ru.mp45.piuslab2.Generator.*;
 
 public class DrawChart {
 
-
-    public static double[][] createHistData(double... points) {
-
-        int part = 10;
-
-        double[][] result = new double[part][2];
-
-        double diff = (max(points) - min(points)) / part;
-        double min = min(points);
-
-        for (int i = 0; i < part; i++) {
-            result[i][0] = min + i * diff + diff / 2;
-            result[i][1] = 0;
-        }
-
-        for (int i = 0; i < points.length; i++) {
-            int index = (int) ((points[i] - min) / diff);
-            if (index == 10) {
-                index--;
-            }
-            result[index][1] += 1;
-        }
-
-        return result;
-    }
 
     public static void setValueToHist(BarChart chart, double... points) {
 
@@ -56,7 +32,7 @@ public class DrawChart {
         //D *= D;
         D = Math.round(D * scale) / scale;
 
-        //chart.setTitle("M(x) = " + M + ", D(x) = " + D);
+        chart.setTitle("M(x) = " + M + ", D(x) = " + D);
 
         XYChart.Series series = new XYChart.Series();
 
@@ -75,5 +51,31 @@ public class DrawChart {
 
         chart.getData().add(mean_series);
 
+    }
+
+    public static void setValueToChart2(LineChart chart, double[][] points) {
+
+        XYChart.Series series_porog_min = new XYChart.Series();
+        for (int i = 0; i < points[0].length; i++) {
+
+            series_porog_min.getData().add(new XYChart.Data(i, points[0][i]));
+        }
+
+        XYChart.Series main_series = new XYChart.Series();
+        for (int i = 0; i < points[1].length; i++) {
+
+            main_series.getData().add(new XYChart.Data(i, points[1][i]));
+        }
+
+        XYChart.Series series_porog_max = new XYChart.Series();
+        for (int i = 0; i < points[2].length; i++) {
+
+            series_porog_max.getData().add(new XYChart.Data(i, points[2][i]));
+        }
+
+
+        chart.getData().add(series_porog_min);
+        chart.getData().add(main_series);
+        chart.getData().add(series_porog_max);
     }
 }
