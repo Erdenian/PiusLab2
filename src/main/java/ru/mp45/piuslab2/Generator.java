@@ -1,24 +1,71 @@
 package ru.mp45.piuslab2;
 
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
 
 import java.util.Random;
 
 public class Generator {
 
-    public static double[][] getPorog(double... points) {
+    public static double kxx(int t, int length, double... points) {
+        double result = 0;
 
-        double[][] result = new double[3][points.length];
-        double[] temp;
-        for (int i = 0; i < points.length; i++) {
-            temp = getSub(i + 1, points);
-            double sigmaX = meanSquare(temp);
-            double mean = mean(temp);
-            result[0][i] = sigmaX;
-            result[1][i] = mean;
-            result[2][i] = -sigmaX;
+        int n = length;
+
+        for (int i = 0; i < n - t; i++) {
+            result += points[i] * points[i + t];
+        }
+        return result / (double) (n - t);
+
+    }
+
+    public static double[] rxx(double... points) {
+        int n = points.length;
+
+        int q = 100;
+
+        double mean = mean(points);
+
+        double[] result = new double[q];
+
+        for (int k = 1; k < q; k++) {
+            result[k - 1] = 0;
+            for (int i = 0; i < n - k; i++) {
+                result[k - 1] += (points[i] - mean) * (points[i + k] - mean);
+            }
+            result[k - 1] = result[k - 1] / ((double) (n - q));
+        }
+
+        return result;
+    }
+
+    public static double getPorog2(double sigmaX, int length, double... points) {
+        int n = length;
+
+        double result = 0;
+        for (int p = 1; p < n; p++) {
+            result += (1 - p / (double) n) * kxx(p, length, points);
+        }
+
+        result = 1 / (double) n * sigmaX * sigmaX + 2 / (double) n * result;
+        return Math.sqrt(Math.abs(result));
+
+    }
+
+    public static double[][] getPorog(int finish, double... points) {
+
+        double[][] result = new double[3][finish - 5];
+        double[] mean_temp = new double[finish - 5];
+        double mean = 0;
+        for (int i = 0; i < 5; i++) {
+            mean += points[i];
+        }
+        mean /= (double) 5;
+        for (int i = 5; i < finish; i++) {
+            mean = (mean * i + points[i]) / ((double) (i + 1));
+            mean_temp[i - 5] = mean;
+            double sigmaX = getPorog2(meanSquare(mean_temp), i - 4, mean_temp);
+            result[0][i - 5] = 2 * sigmaX;
+            result[1][i - 5] = mean;
+            result[2][i - 5] = -2 * sigmaX;
         }
         return result;
     }
@@ -39,7 +86,7 @@ public class Generator {
         double[] points = new double[9 * N];
 
         for (int i = 0; i < 9 * N; i++) {
-            points[i] = rand.nextGaussian();
+            points[i] = (rand.nextDouble() - 0.5) * Math.sqrt(12);
         }
 
         return points;
@@ -66,8 +113,8 @@ public class Generator {
         //double T = points.length;
         double T = 12;
 
-        double a = (T - 1) / T;
-        double b = 1 / T;
+        double a = (T - 1) /  T;
+        double b = 1 /  T;
 
         result[0] = 0;
 
@@ -81,8 +128,9 @@ public class Generator {
 
         double k = sigmaY / sigmaX * Math.sqrt(2 * T);
 
-        for (int i = 0; i < result.length; i++) {
-            result[i] *= k;
+
+        for (int i = 1; i < result.length; i++) {
+            result[i] *= 5.5*k;
         }
 
         return result;
@@ -136,6 +184,31 @@ public class Generator {
         }
 
         return min;
+    }
+
+    public static double[][] createHistData(double... points) {
+
+        int part = 100;
+
+        double[][] result = new double[part][2];
+
+        double diff = (max(points) - min(points)) / (double) part;
+        double min = min(points);
+
+        for (int i = 0; i < part; i++) {
+            result[i][0] = min + i * diff + diff / 2;
+            result[i][1] = 0;
+        }
+
+        for (int i = 0; i < points.length; i++) {
+            int index = (int) ((points[i] - min) / diff);
+            if (index == part) {
+                index--;
+            }
+            result[index][1] += 1;
+        }
+
+        return result;
     }
 
 }

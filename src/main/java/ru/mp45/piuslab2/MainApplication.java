@@ -21,7 +21,7 @@ public class MainApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/layouts/main.fxml"));
         Scene scene = new Scene(root, 800.0, 480.0);
 
-        primaryStage.setTitle("Кирилл лох");
+        primaryStage.setTitle("Илья лох");
         primaryStage.setScene(scene);
 
 //        primaryStage.setWidth(primaryScreenBounds.getWidth());
