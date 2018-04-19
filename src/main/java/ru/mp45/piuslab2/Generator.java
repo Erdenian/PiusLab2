@@ -20,7 +20,7 @@ public class Generator {
     public static double[] rxx(double... points) {
         int n = points.length;
 
-        int q = 100;
+        int q = n/2;
 
         double mean = mean(points);
 
@@ -28,7 +28,7 @@ public class Generator {
 
         for (int k = 1; k < q; k++) {
             result[k - 1] = 0;
-            for (int i = 0; i < n - k; i++) {
+            for (int i = 0; i < n - q; i++) {
                 result[k - 1] += (points[i] - mean) * (points[i + k] - mean);
             }
             result[k - 1] = result[k - 1] / ((double) (n - q));
