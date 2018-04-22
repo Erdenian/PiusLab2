@@ -20,7 +20,7 @@ public class Generator {
     public static double[] rxx(double... points) {
         int n = points.length;
 
-        int q = 100;
+        int q = n / 10;
 
         double mean = mean(points);
 
@@ -28,7 +28,7 @@ public class Generator {
 
         for (int k = 1; k < q; k++) {
             result[k - 1] = 0;
-            for (int i = 0; i < n - k; i++) {
+            for (int i = 0; i < n - q; i++) {
                 result[k - 1] += (points[i] - mean) * (points[i + k] - mean);
             }
             result[k - 1] = result[k - 1] / ((double) (n - q));
@@ -86,9 +86,14 @@ public class Generator {
         double[] points = new double[9 * N];
 
         for (int i = 0; i < 9 * N; i++) {
-            points[i] = (rand.nextDouble() - 0.5) * Math.sqrt(12);
+            points[i] = rand.nextDouble();
         }
 
+        double mean = mean(points);
+        double sigma = meanSquare(points);
+        for (int i = 0; i < 9 * N; i++) {
+            points[i] = (points[i] - mean) / sigma;
+        }
         return points;
     }
 
@@ -113,8 +118,8 @@ public class Generator {
         //double T = points.length;
         double T = 12;
 
-        double a = (T - 1) /  T;
-        double b = 1 /  T;
+        double a = (T - 1) / T;
+        double b = 1 / T;
 
         result[0] = 0;
 
@@ -122,15 +127,14 @@ public class Generator {
             result[i] = a * result[i - 1] + b * points[i];
         }
 
-
-        double sigmaX = meanSquare(points);
         double sigmaY = meanSquare(result);
 
-        double k = sigmaY / sigmaX * Math.sqrt(2 * T);
-
+        double mean = mean(result);
 
         for (int i = 1; i < result.length; i++) {
-            result[i] *= 5.5*k;
+            //result[i] *= 5.5*k;
+            result[i] -= mean;
+            result[i] /= sigmaY;
         }
 
         return result;
