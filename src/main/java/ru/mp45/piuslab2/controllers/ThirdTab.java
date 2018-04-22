@@ -55,6 +55,8 @@ public class ThirdTab {
         double[] color_noisy = Generator.colorNoisy(white_noisy);
         double[][] porog_color = Generator.getPorog(N/3,color_noisy);
 
+
+        chart_second.getData().clear();
         DrawChart.setValueToChart(chart_second,color_noisy);
         DrawChart.setValueToChart(chart_second_porog,porog_color[1]);
 

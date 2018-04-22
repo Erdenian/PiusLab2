@@ -20,7 +20,7 @@ public class Generator {
     public static double[] rxx(double... points) {
         int n = points.length;
 
-        int q = n/10;
+        int q = n / 10;
 
         double mean = mean(points);
 
@@ -86,9 +86,14 @@ public class Generator {
         double[] points = new double[9 * N];
 
         for (int i = 0; i < 9 * N; i++) {
-            points[i] = (rand.nextDouble() - 0.5) * Math.sqrt(12);
+            points[i] = rand.nextDouble();
         }
 
+        double mean = mean(points);
+        double sigma = meanSquare(points);
+        for (int i = 0; i < 9 * N; i++) {
+            points[i] = (points[i] - mean) / sigma;
+        }
         return points;
     }
 
@@ -113,8 +118,8 @@ public class Generator {
         //double T = points.length;
         double T = 12;
 
-        double a = (T - 1) /  T;
-        double b = 1 /  T;
+        double a = (T - 1) / T;
+        double b = 1 / T;
 
         result[0] = 0;
 
