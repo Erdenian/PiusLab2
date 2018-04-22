@@ -29,10 +29,11 @@ public class DrawChart {
         double scale = 1000;
         double M = Math.round(mean(points) * scale) / scale;
         double D = meanSquare(points);
+        double rx = Math.round(max(rxx(points)) * scale) / scale;
         //D *= D;
         D = Math.round(D * scale) / scale;
 
-        chart.setTitle("M(x) = " + M + ", D(x) = " + D);
+        chart.setTitle("M(x) = " + M + ", D(x) = " + D + ", max(Rxx(q)) = " + rx);
 
         XYChart.Series series = new XYChart.Series();
 
