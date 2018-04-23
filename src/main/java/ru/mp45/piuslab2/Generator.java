@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Generator {
 
+    //подсчет ковариации по формуле
     public static double kxx(int t, int length, double... points) {
         double result = 0;
 
@@ -17,6 +18,7 @@ public class Generator {
 
     }
 
+    //подсчет кореляции по формле
     public static double[] rxx(double... points) {
         int n = points.length;
 
@@ -37,6 +39,7 @@ public class Generator {
         return result;
     }
 
+    //подсчет только пороговой функции по формуле
     public static double getPorog2(double sigmaX, int length, double... points) {
         int n = length;
 
@@ -50,6 +53,7 @@ public class Generator {
 
     }
 
+    //подсчет пороговых фукций и зависимости
     public static double[][] getPorog(int finish, double... points) {
 
         double[][] result = new double[3][finish - 5];
@@ -70,15 +74,7 @@ public class Generator {
         return result;
     }
 
-    public static double[] getSub(int n, double... points) {
-        double[] result = new double[n];
-
-        for (int i = 0; i < n; i++) {
-            result[i] = points[i];
-        }
-        return result;
-    }
-
+    //последовательность случайных чисел равномерного распределение
     public static double[] getRandomPoints(int N) {
 
         Random rand = new Random();
@@ -89,14 +85,12 @@ public class Generator {
             points[i] = rand.nextDouble();
         }
 
-        double mean = mean(points);
-        double sigma = meanSquare(points);
-        for (int i = 0; i < 9 * N; i++) {
-            points[i] = (points[i] - mean) / sigma;
-        }
+        points = norm(points);
+
         return points;
     }
 
+    //получение реализации белого шума
     public static double[] whiteNoisy(double... points) {
         double[] result = new double[points.length / 9];
 
@@ -111,6 +105,7 @@ public class Generator {
         return result;
     }
 
+    //поулчение реализации окрашенного шума
     public static double[] colorNoisy(double... points) {
 
         double[] result = new double[points.length];
@@ -127,19 +122,28 @@ public class Generator {
             result[i] = a * result[i - 1] + b * points[i];
         }
 
-        double sigmaY = meanSquare(result);
+        result = norm(result);
 
-        double mean = mean(result);
+        return result;
+    }
 
-        for (int i = 1; i < result.length; i++) {
-            //result[i] *= 5.5*k;
-            result[i] -= mean;
+    //нормировка (среднее = 0, отклонение = 1)
+    public static double[] norm(double... points) {
+        double[] result = new double[points.length];
+
+        double sigmaY = meanSquare(points);
+
+        double mean = mean(points);
+
+        for (int i = 1; i < points.length; i++) {
+            result[i] = points[i] - mean;
             result[i] /= sigmaY;
         }
 
         return result;
     }
 
+    //подсчет среднеквадратичного отклонения
     public static double meanSquare(double... points) {
 
         double result = 0;
@@ -156,6 +160,7 @@ public class Generator {
         return result;
     }
 
+    //подсчет среднего
     public static double mean(double... points) {
         double mean = 0;
 
@@ -166,6 +171,7 @@ public class Generator {
         return mean / points.length;
     }
 
+    //нахождение максимального элемента
     public static double max(double... points) {
         double max = points[0];
 
@@ -178,6 +184,7 @@ public class Generator {
         return max;
     }
 
+    //нахожедние минимального элемента
     public static double min(double... points) {
         double min = points[0];
 
@@ -190,6 +197,7 @@ public class Generator {
         return min;
     }
 
+    //создание последовательности удобной для рисования гистограмм
     public static double[][] createHistData(double... points) {
 
         int part = 100;
