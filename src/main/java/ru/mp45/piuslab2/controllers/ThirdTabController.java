@@ -1,59 +1,63 @@
 package ru.mp45.piuslab2.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
+import ru.mp45.piuslab2.DrawChart;
+import ru.mp45.piuslab2.Generator;
 
-import java.util.Random;
-
-import static ru.mp45.piuslab2.DrawChart.*;
-import static ru.mp45.piuslab2.Generator.*;
-
-public class SecondTab {
+public class ThirdTabController {
 
     @FXML
     private LineChart chart_first;
 
     @FXML
+    private LineChart chart_first_porog;
+
+    @FXML
     private LineChart chart_second;
 
     @FXML
-    private LineChart chart_third;
-
-    @FXML
-    private BarChart hist_first;
-
-    @FXML
-    private BarChart hist_second;
-
-    @FXML
-    private BarChart hist_third;
-
+    private LineChart chart_second_porog;
 
     private int N = 1000;
-
 
     @FXML
     private void initialize() {
 
-        double[] points = getRandomPoints(N);
+        double[] points = Generator.getRandomPoints(N);
+        double[] white_noisy = Generator.whiteNoisy(points);
+        double[][] porog = Generator.getPorog(N/3,white_noisy);
 
-        setValueToChart(chart_first, points);
-        setValueToHist(hist_first, points);
+        DrawChart.setValueToChart(chart_first,white_noisy);
+        DrawChart.setValueToChart2(chart_first_porog,porog);
 
-        double[] white_noisy = whiteNoisy(points);
+        double[] color_noisy = Generator.colorNoisy(white_noisy);
+        double[][] porog_color = Generator.getPorog(N/3,color_noisy);
 
-        setValueToChart(chart_second, white_noisy);
-        setValueToHist(hist_second, white_noisy);
-
-        double[] color_noisy = colorNoisy(white_noisy);
-
-        setValueToChart(chart_third, color_noisy);
-        setValueToHist(hist_third, color_noisy);
+        DrawChart.setValueToChart(chart_second,color_noisy);
+        DrawChart.setValueToChart2(chart_second_porog,porog_color);
 
     }
 
+    @FXML
+    private void getNext(){
 
+        double[] points = Generator.getRandomPoints(N);
+        double[] white_noisy = Generator.whiteNoisy(points);
+        double[][] porog = Generator.getPorog(N/3,white_noisy);
+
+        chart_first.getData().clear();
+        DrawChart.setValueToChart(chart_first,white_noisy);
+        DrawChart.setValueToChart(chart_first_porog,porog[1]);
+
+        double[] color_noisy = Generator.colorNoisy(white_noisy);
+        double[][] porog_color = Generator.getPorog(N/3,color_noisy);
+
+
+        chart_second.getData().clear();
+        DrawChart.setValueToChart(chart_second,color_noisy);
+        DrawChart.setValueToChart(chart_second_porog,porog_color[1]);
+
+    }
 
 }
