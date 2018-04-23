@@ -7,13 +7,13 @@
          xmlns:fx="http://www.w3.org/2001/XInclude"
          prefHeight="800.0" prefWidth="480.0">
     <tabs>
-        <Tab text="first">
+        <Tab text="Моделирование объектов">
             <fx:include fx:id="firstTabPage" source="first_tab.fxml"/>
         </Tab>
-        <Tab text="second">
+        <Tab text="Гистограммы">
             <fx:include fx:id="secondTabPage" source="second_tab.fxml"/>
         </Tab>
-        <Tab text="third">
+        <Tab text="Доверительные интервалы">
             <fx:include fx:id="thirdTabPage" source="third_tab.fxml"/>
         </Tab>
     </tabs>

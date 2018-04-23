@@ -3,14 +3,12 @@ package ru.mp45.piuslab2.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
 
-import java.util.Random;
-
-import static ru.mp45.piuslab2.DrawChart.*;
+import static ru.mp45.piuslab2.DrawChart.setValueToChart;
+import static ru.mp45.piuslab2.DrawChart.setValueToHist;
 import static ru.mp45.piuslab2.Generator.*;
 
-public class SecondTab {
+public class SecondTabController {
 
     @FXML
     private LineChart chart_first;

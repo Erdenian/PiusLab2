@@ -5,7 +5,7 @@ import javafx.scene.chart.LineChart;
 import ru.mp45.piuslab2.DrawChart;
 import ru.mp45.piuslab2.Generator;
 
-public class ThirdTab {
+public class ThirdTabController {
 
     @FXML
     private LineChart chart_first;
