@@ -22,7 +22,7 @@
         <Button defaultButton="true" onAction="#onClickMethod" text="Построить"/>
 
     </HBox>
-    <LineChart fx:id="chart" createSymbols="false" stylesheets="@../stylesheets/chart_style.css">
+    <LineChart fx:id="chart" stylesheets="@../stylesheets/chart_style.css">
         <xAxis>
             <NumberAxis side="BOTTOM"/>
         </xAxis>

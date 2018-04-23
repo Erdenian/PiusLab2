@@ -10,8 +10,7 @@ import javafx.scene.control.TextFormatter;
 
 import java.util.regex.Pattern;
 
-import static java.lang.Math.abs;
-import static java.lang.Math.random;
+import static java.lang.Math.*;
 
 public class FirstTabController {
 
@@ -70,8 +69,8 @@ public class FirstTabController {
     }
 
     // Черный ящик
-    private static float[] f4(float... y) {
-        for (int i = 1; i < y.length; i++) y[i] *= random();
+    private static float[] f4(float[] h, float... y) {
+        for (int i = 1; i < y.length; i++) y[i] *= h[i];
         return y;
     }
 
@@ -117,19 +116,41 @@ public class FirstTabController {
             else y[i] = 1.0f * K;
         }
 
+        chart.getData().clear();
         // Применяем функцию в зависимости от выбранного варианта
         switch (type) {
             case 0:
+                XYChart.Series<Float, Float> series = new XYChart.Series<>();
+                series.getData().add(new XYChart.Data<>(0.0f, 1.0f));
+                chart.getData().add(series);
                 y = f1(y);
                 break;
             case 1:
+                series = new XYChart.Series<>();
+                series.getData().add(new XYChart.Data<>(0.0f, 1.0f));
+                chart.getData().add(series);
                 y = f2((int) (end / 2.0f / delta), y);
                 break;
             case 2:
+                series = new XYChart.Series<>();
+                for (float v : x) series.getData().add(new XYChart.Data<>(v, (float) (exp(-abs(v) / end) / 2 / end)));
+                chart.getData().add(series);
                 y = f3(end, y);
                 break;
             case 3:
-                y = f4(y);
+                float[] h = new float[y.length];
+                for (int i = 0; i < h.length; i++) h[i] = (float) random();
+                float[] r = new float[h.length];
+                for (int i = 0; i < r.length; i++) {
+                    float sum = 0.0f;
+                    for (int j = 0; j < r.length - i; j++) sum += h[j] * h[j + i];
+                    r[i] = sum;
+                }
+
+                series = new XYChart.Series<>();
+                for (float v : r) series.getData().add(new XYChart.Data<>(v, (float) (exp(-abs(v) / end) / 2 / end)));
+                chart.getData().add(series);
+                y = f4(h, y);
                 break;
             default:
                 throw new IllegalArgumentException("Неизвестный график: " + type);
@@ -139,7 +160,6 @@ public class FirstTabController {
         XYChart.Series<Float, Float> series = new XYChart.Series<>();
         for (int i = 0; i < x.length; i++)
             series.getData().add(new XYChart.Data<>(x[i], y[i]));
-        chart.getData().clear();
         chart.getData().add(series);
     }
 }
