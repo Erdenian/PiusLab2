@@ -70,8 +70,14 @@ public class FirstTabController {
 
     // Черный ящик
     private static float[] f4(float[] h, float... y) {
-        for (int i = 1; i < y.length; i++) y[i] *= h[i];
-        return y;
+        float[] result = new float[y.length];
+        for (int j = 0; j < y.length; j++) {
+            float sum = 0.0f;
+            for (int i = 0; i < j; i++)
+                sum += y[i] * h[j - i];
+            result[j] = sum;
+        }
+        return result;
     }
 
     @FXML
@@ -121,13 +127,13 @@ public class FirstTabController {
         switch (type) {
             case 0:
                 XYChart.Series<Float, Float> series = new XYChart.Series<>();
-                series.getData().add(new XYChart.Data<>(0.0f, 1.0f));
+                for (float v : x) series.getData().add(new XYChart.Data<>(v, 1.0f));
                 chart.getData().add(series);
                 y = f1(y);
                 break;
             case 1:
                 series = new XYChart.Series<>();
-                series.getData().add(new XYChart.Data<>(0.0f, 1.0f));
+                for (float v : x) series.getData().add(new XYChart.Data<>(v, 1.0f));
                 chart.getData().add(series);
                 y = f2((int) (end / 2.0f / delta), y);
                 break;
@@ -148,7 +154,8 @@ public class FirstTabController {
                 }
 
                 series = new XYChart.Series<>();
-                for (float v : r) series.getData().add(new XYChart.Data<>(v, (float) (exp(-abs(v) / end) / 2 / end)));
+                for (int i = 0; i < x.length; i++)
+                    series.getData().add(new XYChart.Data<>(x[i], (float) exp(-abs(r[i]) / end)));
                 chart.getData().add(series);
                 y = f4(h, y);
                 break;

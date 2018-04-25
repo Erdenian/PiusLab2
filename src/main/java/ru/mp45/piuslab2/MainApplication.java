@@ -17,7 +17,7 @@ public class MainApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/layouts/main.fxml"));
         Scene scene = new Scene(root, 800.0, 480.0);
 
-        primaryStage.setTitle("Илья лох");
+        primaryStage.setTitle("Лабораторная работа 2");
         primaryStage.setScene(scene);
 
         primaryStage.setResizable(false);

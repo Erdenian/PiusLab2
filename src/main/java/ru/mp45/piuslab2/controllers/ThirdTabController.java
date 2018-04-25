@@ -62,7 +62,7 @@ public class ThirdTabController {
         chart_first.getData().clear();
         DrawChart.setValueToChart(chart_first, white_noisy);
         DrawChart.setValueToChart(chart_first_porog, porog[1]);
-
+        chart_first_porog.setTitle(null);
         // получаем реализацию окрашенного шума
         double[] color_noisy = Generator.colorNoisy(white_noisy);
         // считаем пороги и зависимость для окрашенного шума
@@ -73,7 +73,6 @@ public class ThirdTabController {
         chart_second.getData().clear();
         DrawChart.setValueToChart(chart_second, color_noisy);
         DrawChart.setValueToChart(chart_second_porog, porog_color[1]);
-
+        chart_second_porog.setTitle(null);
     }
-
 }
