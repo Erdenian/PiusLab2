@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.chart.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.*?>
-<ScrollPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121"
-            fx:controller="ru.mp45.piuslab2.controllers.SecondTabController">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.mp45.piuslab2.controllers.SecondTabController">
    <content>
       <AnchorPane maxHeight="480.0" maxWidth="800.0">
          <children>
@@ -16,8 +22,11 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="207.0" minHeight="160.0" prefHeight="199.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="207.0" minHeight="160.0" prefHeight="199.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="223.0" minHeight="160.0" prefHeight="197.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="223.0" minHeight="160.0" prefHeight="197.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="200.0" minHeight="160.0" prefHeight="194.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="200.0" minHeight="160.0" prefHeight="194.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <LineChart fx:id="chart_first" createSymbols="false" prefHeight="140.0" prefWidth="600.0" stylesheets="@../stylesheets/chart_style.css">
@@ -42,7 +51,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </BarChart>
-                  <LineChart fx:id="chart_second" createSymbols="false" prefHeight="177.0" prefWidth="627.0" stylesheets="@../stylesheets/chart_style.css" GridPane.rowIndex="1">
+                  <LineChart fx:id="chart_second" createSymbols="false" prefHeight="177.0" prefWidth="627.0" stylesheets="@../stylesheets/chart_style.css" GridPane.rowIndex="2">
                      <xAxis>
                         <NumberAxis side="BOTTOM" />
                      </xAxis>
@@ -53,7 +62,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </LineChart>
-                  <BarChart fx:id="hist_second" barGap="0.0" categoryGap="0.0" nodeOrientation="RIGHT_TO_LEFT" rotate="90.0" translateX="-20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <BarChart fx:id="hist_second" barGap="0.0" categoryGap="0.0" nodeOrientation="RIGHT_TO_LEFT" rotate="90.0" translateX="-20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <xAxis>
                         <CategoryAxis side="BOTTOM" />
                      </xAxis>
@@ -64,7 +73,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </BarChart>
-                  <LineChart fx:id="chart_third" createSymbols="false" prefHeight="150.0" prefWidth="470.0" stylesheets="@../stylesheets/chart_style.css" GridPane.rowIndex="2">
+                  <LineChart fx:id="chart_third" createSymbols="false" prefHeight="150.0" prefWidth="470.0" stylesheets="@../stylesheets/chart_style.css" GridPane.rowIndex="4">
                      <xAxis>
                         <NumberAxis side="BOTTOM" />
                      </xAxis>
@@ -75,7 +84,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </LineChart>
-                  <BarChart fx:id="hist_third" barGap="0.0" categoryGap="0.0" nodeOrientation="RIGHT_TO_LEFT" rotate="90.0" translateX="-20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <BarChart fx:id="hist_third" barGap="0.0" categoryGap="0.0" nodeOrientation="RIGHT_TO_LEFT" rotate="90.0" translateX="-20.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <xAxis>
                         <CategoryAxis side="BOTTOM" />
                      </xAxis>
@@ -86,6 +95,39 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </BarChart>
+                  <LineChart fx:id="chart_first_rxx" createSymbols="false" prefHeight="140.0" prefWidth="600.0" stylesheets="@../stylesheets/chart_style.css" GridPane.rowIndex="1">
+                     <xAxis>
+                        <NumberAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </LineChart>
+                  <LineChart fx:id="chart_second_rxx" createSymbols="false" prefHeight="140.0" prefWidth="600.0" stylesheets="@../stylesheets/chart_style.css" GridPane.rowIndex="3">
+                     <xAxis>
+                        <NumberAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </LineChart>
+                  <LineChart fx:id="chart_third_rxx" createSymbols="false" prefHeight="140.0" prefWidth="600.0" stylesheets="@../stylesheets/chart_style.css" GridPane.rowIndex="5">
+                     <xAxis>
+                        <NumberAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </LineChart>
                </children>
             </GridPane>
          </children>
