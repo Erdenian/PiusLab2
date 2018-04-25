@@ -20,6 +20,15 @@ public class SecondTabController {
     private LineChart chart_third;
 
     @FXML
+    private LineChart chart_first_rxx;
+
+    @FXML
+    private LineChart chart_second_rxx;
+
+    @FXML
+    private LineChart chart_third_rxx;
+
+    @FXML
     private BarChart hist_first;
 
     @FXML
@@ -41,6 +50,8 @@ public class SecondTabController {
         // рисуем график и гистограмму для случайных чисел
         setValueToChart(chart_first, points);
         setValueToHist(hist_first, points);
+        setValueToChart(chart_first_rxx,rxx(points));
+        chart_first_rxx.setTitle(null);
 
         // поулчаем реализацию белого шума
         double[] white_noisy = whiteNoisy(points);
@@ -48,6 +59,8 @@ public class SecondTabController {
         // рисуем график и гистограмму дяля белого шума
         setValueToChart(chart_second, white_noisy);
         setValueToHist(hist_second, white_noisy);
+        setValueToChart(chart_second_rxx,rxx(white_noisy));
+        chart_second_rxx.setTitle(null);
 
         // получаем реализацию окрашенного шума
         double[] color_noisy = colorNoisy(white_noisy);
@@ -55,6 +68,8 @@ public class SecondTabController {
         // рисуем график и гистограмму окрашенного шума
         setValueToChart(chart_third, color_noisy);
         setValueToHist(hist_third, color_noisy);
+        setValueToChart(chart_third_rxx,rxx(color_noisy));
+        chart_third_rxx.setTitle(null);
 
     }
 
